@@ -1,0 +1,28 @@
+{
+  "name": "bg-tourist-guide-server-nodejs",
+  "version": "1.0.0",
+  "description": "Server for the BG Tourist Guide application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BG-Tourist-Guide/BG-Tourist-Guide-Server-NodeJS.git"
+  },
+  "author": "Tsvetan Milanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BG-Tourist-Guide/BG-Tourist-Guide-Server-NodeJS/issues"
+  },
+  "homepage": "https://github.com/BG-Tourist-Guide/BG-Tourist-Guide-Server-NodeJS#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "hat": "0.0.3",
+    "mongoose": "^4.4.5",
+    "passport": "^0.3.2",
+    "passport-http-bearer": "^1.0.1",
+    "sha1": "^1.1.1"
+  }
+}
