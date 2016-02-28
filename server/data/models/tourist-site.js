@@ -14,8 +14,7 @@ module.exports = function() {
       required: true
     },
     address: {
-      type: String,
-      required: true
+      type: String
     },
     latitude: {
       type: Number,
@@ -24,6 +23,37 @@ module.exports = function() {
     longitude: {
       type: Number,
       required: true
+    },
+    ratings: {
+      type: [{
+        author: {
+          type: String,
+          required: true
+        },
+        value: {
+          type: Number,
+          required: true
+        }
+      }],
+      default: [],
+      comments: {
+        type: [{
+          author: {
+            type: String,
+            required: true
+          },
+          content: {
+            type: String,
+            required: true
+          },
+          commentedOn: {
+            type: Date,
+            required: true,
+            default: new Date()
+          }
+        }],
+        default: []
+      }
     }
   });
 
