@@ -17,5 +17,15 @@ module.exports = {
     }
 
     return true;
+  },
+  isTouristSiteRequestModelValid: function(model) {
+    if (!model.title ||
+      !model.description ||
+      !model.latitude ||
+      !model.longitude) {
+        return false;
+    }
+
+    return true;
   }
 };
