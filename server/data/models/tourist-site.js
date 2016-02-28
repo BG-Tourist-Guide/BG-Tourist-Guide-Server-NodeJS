@@ -35,25 +35,25 @@ module.exports = function() {
           required: true
         }
       }],
-      default: [],
-      comments: {
-        type: [{
-          author: {
-            type: String,
-            required: true
-          },
-          content: {
-            type: String,
-            required: true
-          },
-          commentedOn: {
-            type: Date,
-            required: true,
-            default: new Date()
-          }
-        }],
-        default: []
-      }
+      default: []
+    },
+    comments: {
+      type: [{
+        author: {
+          type: String,
+          required: true
+        },
+        content: {
+          type: String,
+          required: true
+        },
+        commentedOn: {
+          type: Date,
+          required: true,
+          default: new Date()
+        }
+      }],
+      default: []
     }
   });
 
