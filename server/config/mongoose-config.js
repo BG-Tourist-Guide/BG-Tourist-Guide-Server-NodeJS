@@ -13,7 +13,7 @@ module.exports = {
       connectionString = 'mongodb://localhost:27017/BGTouristGuide';
     } else {
       connectionString = process.env.PRODUCTION_DB_CONNECTION_STRING;
-      shouldSeedData = false;
+      shouldSeedData = true;
     }
 
     modelsLoader.loadModels();
