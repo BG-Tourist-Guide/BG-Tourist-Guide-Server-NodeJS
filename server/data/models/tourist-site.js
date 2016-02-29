@@ -16,6 +16,15 @@ module.exports = function() {
     address: {
       type: String
     },
+    isOfficial: {
+      type: Boolean,
+      required: true
+    },
+    status: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     latitude: {
       type: Number,
       required: true
@@ -53,6 +62,10 @@ module.exports = function() {
           default: new Date()
         }
       }],
+      default: []
+    },
+    visitors: {
+      type: [String],
       default: []
     }
   });
