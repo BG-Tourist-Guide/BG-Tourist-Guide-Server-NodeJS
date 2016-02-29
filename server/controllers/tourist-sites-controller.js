@@ -18,6 +18,7 @@ module.exports = {
 
     touristSite.ratings = [];
     touristSite.comments = [];
+    touristSite.status = constants.TOURIST_SITE_STATUS_WAITING_FOR_APPROVAL;
 
     TouristSite.create(touristSite)
       .then(function(dbTouristSite) {
