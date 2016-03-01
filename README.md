@@ -14,6 +14,7 @@ Node.js server for the BG Tourist Guide application
           "password": "123456"
       }
 * Tourist Sites:
+    * Get All - (Get) /api/tourist-sites
     * Add - (POST) /api/tourist-sites:
       * {
           "title": "someTitle",

@@ -7,6 +7,7 @@ module.exports = function(app) {
   let router = express.Router();
 
   router
+    .get('/', touristSitesController.getAll)
     .post('/', identity.requiresAuthentication(), touristSitesController.addTouristSite);
 
   app.use('/api/tourist-sites', router);

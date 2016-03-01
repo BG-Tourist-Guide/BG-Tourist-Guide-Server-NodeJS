@@ -3,6 +3,14 @@ let TouristSite = require('mongoose').model('TouristSite');
 let constants = require('./../common/constants');
 
 module.exports = {
+  getAll: function (req, res) {
+    TouristSite.find({})
+      .then(function (data) {
+        res.json({
+          result: data
+        });
+      });
+  },
   addTouristSite: function(req, res) {
     let modelValidator = require('./../common/model-validator');
     let touristSite = req.body;
