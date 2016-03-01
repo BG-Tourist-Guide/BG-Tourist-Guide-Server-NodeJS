@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "5.6.x",
+    "npm": "3.7.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BG-Tourist-Guide/BG-Tourist-Guide-Server-NodeJS.git"
