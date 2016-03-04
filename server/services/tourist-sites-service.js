@@ -91,6 +91,10 @@ class TouristSitesServices {
             }
           });
 
+          result.sort(function (first, second) {
+            return second.distanceFromMe - first.distanceFromMe;
+          });
+
           resolve(result);
         });
     });
