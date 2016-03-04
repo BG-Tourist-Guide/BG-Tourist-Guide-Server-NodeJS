@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   router
     .get('/', touristSitesController.getAll)
+    .get('/near-me', touristSitesController.nearMe)
     .post('/', identity.requiresAuthentication(), touristSitesController.addTouristSite);
 
   app.use('/api/tourist-sites', router);
