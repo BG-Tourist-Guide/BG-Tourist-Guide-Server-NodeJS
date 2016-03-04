@@ -1,6 +1,7 @@
 'use strict';
 
 const DEFAULT_RADIUS_IN_KILOMETERS = 5;
+const DEFAULT_PAGE_SIZE = 10;
 let TouristSite = require('mongoose').model('TouristSite');
 let geopositionHelper = require('./../infrastructure/geoposition-helper.js').defaultInstance;
 let constants = require('./../common/constants');
@@ -9,6 +10,22 @@ class TouristSitesServices {
   getAll() {
     let promise = new Promise(function (resolve, reject) {
       TouristSite.find({})
+        .then(resolve, reject);
+    });
+
+    return promise;
+  }
+
+  getForPage(page, pageSize) {
+    pageSize = pageSize || DEFAULT_PAGE_SIZE;
+
+    let promise = new Promise(function (resolve, reject) {
+      TouristSite.find({})
+        .sort({
+          title: 1
+        })
+        .skip(page * pageSize)
+        .limit(pageSize)
         .then(resolve, reject);
     });
 

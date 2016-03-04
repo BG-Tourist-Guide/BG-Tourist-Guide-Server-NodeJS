@@ -4,13 +4,27 @@ let touristSites = require('./../services/tourist-sites-service.js').defaultInst
 
 module.exports = {
   getAll: function (req, res) {
-    touristSites.getAll({})
+    touristSites.getAll()
       .then(function (data) {
         res.json({
           result: data
         });
       }, function (err) {
-        res.json(400, err);
+        res.status(400)
+          .json(err);
+      });
+  },
+  getForPage: function (req, res) {
+    let page = +req.query.page || 0;
+    page += 1;
+    touristSites.getForPage(page)
+      .then(function (data) {
+        res.json({
+          result: data
+        });
+      }, function (err) {
+        res.status(400)
+          .json(err);
       });
   },
   nearMe: function (req, res) {
@@ -19,9 +33,10 @@ module.exports = {
     let radius = +req.query.radius;
 
     if (!latitude || !longitude) {
-      res.json(400, {
-        message: 'The latitude and the longitude are required to find the tourist sites near you.'
-      });
+      res.status(400)
+        .json({
+          message: 'The latitude and the longitude are required to find the tourist sites near you.'
+        });
       return;
     }
 
@@ -37,23 +52,26 @@ module.exports = {
     let touristSite = req.body;
 
     if (!modelValidator.isTouristSiteRequestModelValid(touristSite)) {
-      res.json(400, {
-        message: 'Invalid tourist site registration data!'
-      });
+      res.status(400)
+        .json({
+          message: 'Invalid tourist site registration data!'
+        });
 
       return;
     }
 
     touristSites.addTouristSite(touristSite)
       .then(function (dbTouristSite) {
-        res.json(201, {
-          result: dbTouristSite
-        });
+        res.status(201)
+          .json({
+            result: dbTouristSite
+          });
       }, function (err) {
         console.log(err);
-        res.json(400, {
-          message: 'The tourist site cannot be saved. The input data is not valid.'
-        });
+        res.status(400)
+          .json({
+            message: 'The tourist site cannot be saved. The input data is not valid.'
+          });
       });
   }
 };
