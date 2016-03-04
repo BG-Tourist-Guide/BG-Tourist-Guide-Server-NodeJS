@@ -3,8 +3,31 @@
 const DEFAULT_RADIUS_IN_KILOMETERS = 5;
 let TouristSite = require('mongoose').model('TouristSite');
 let geopositionHelper = require('./../infrastructure/geoposition-helper.js').defaultInstance;
+let constants = require('./../common/constants');
 
 class TouristSitesServices {
+  getAll() {
+    let promise = new Promise(function (resolve, reject) {
+      TouristSite.find({})
+        .then(resolve, reject);
+    });
+
+    return promise;
+  }
+
+  addTouristSite(touristSite) {
+    let promise = new Promise(function (resolve, reject) {
+      touristSite.ratings = [];
+      touristSite.comments = [];
+      touristSite.status = constants.TOURIST_SITE_STATUS_WAITING_FOR_APPROVAL;
+
+      TouristSite.create(touristSite)
+        .then(resolve, reject);
+    });
+
+    return promise;
+  }
+
   getTouristSitesNearMe(latitude, longitude, radius) {
     radius = radius || DEFAULT_RADIUS_IN_KILOMETERS;
 
