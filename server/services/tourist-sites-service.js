@@ -86,7 +86,7 @@ class TouristSitesServices {
             });
 
             if (distance <= radius) {
-              item.distanceFromMe = distance;
+              item.distanceFromMe = +distance.toFixed(2);
               result.push(item);
             }
           });
