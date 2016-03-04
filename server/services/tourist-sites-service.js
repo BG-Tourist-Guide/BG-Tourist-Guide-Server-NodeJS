@@ -92,7 +92,7 @@ class TouristSitesServices {
           });
 
           result.sort(function (first, second) {
-            return second.distanceFromMe - first.distanceFromMe;
+            return first.distanceFromMe - second.distanceFromMe;
           });
 
           resolve(result);
