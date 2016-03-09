@@ -90,7 +90,9 @@ module.exports = {
 
     touristSites.rateTouristSite(ratingOptions.id, user.userName, ratingOptions.value)
       .then(function(touristSite) {
-        res.json(touristSite);
+        res.json({
+          result: touristSite
+        });
       });
   }
 };
