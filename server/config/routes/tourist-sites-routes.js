@@ -10,6 +10,7 @@ module.exports = function (app) {
     .get('/', touristSitesController.getForPage)
     .get('/all', touristSitesController.getAll)
     .get('/near-me', touristSitesController.nearMe)
+    .post('/rate', identity.requiresAuthentication(), touristSitesController.rateTouristSite)
     .post('/', identity.requiresAuthentication(), touristSitesController.addTouristSite);
 
   app.use('/api/tourist-sites', router);

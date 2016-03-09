@@ -23,7 +23,19 @@ module.exports = {
       !model.description ||
       !model.latitude ||
       !model.longitude) {
-        return false;
+      return false;
+    }
+
+    return true;
+  },
+  isRateTouristSiteRequestModelValid: function(model) {
+    if (!model.id ||
+      !model.value) {
+      return false;
+    }
+    
+    if (model.value < constants.MIN_RATE_VALUE || constants.MAX_RATE_VALUE < model.value) {
+      return false;
     }
 
     return true;

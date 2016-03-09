@@ -117,6 +117,26 @@ class TouristSitesServices {
 
     return promise;
   }
+
+  rateTouristSite(id, author, rateValue) {
+    let promise = new Promise(function (resolve, reject) {
+        let rating = {
+      value: rateValue,
+      author
+    };
+    
+    TouristSite.findById(id)
+      .then(function (touristSite) {
+        touristSite.ratings.push(rating);
+        return touristSite.save();
+      }, reject)
+      .then(function (touristSite) {
+        resolve(touristSite);
+      }, reject);
+    });
+    
+    return promise;
+  }
 }
 
 module.exports = {
