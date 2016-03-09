@@ -8,7 +8,7 @@ let constants = require('./../common/constants');
 
 class TouristSitesServices {
   getAll() {
-    let promise = new Promise(function (resolve, reject) {
+    let promise = new Promise(function(resolve, reject) {
       TouristSite.find({})
         .then(resolve, reject);
     });
@@ -16,16 +16,32 @@ class TouristSitesServices {
     return promise;
   }
 
-  getForPage(page, pageSize) {
+  getForPage(page, type, pageSize) {
     pageSize = pageSize || DEFAULT_PAGE_SIZE;
 
-    let promise = new Promise(function (resolve, reject) {
-      TouristSite.find({})
-        .sort({
-          title: 1
-        })
+    let promise = new Promise(function(resolve, reject) {
+      let query;
+
+      if (type === constants.ALL_TOURIST_SITES_TYPE) {
+        query = TouristSite.find({});
+      } else if (type === constants.OFFICIAL_TOURIST_SITES_TYPE) {
+        query = TouristSite.find({
+          isOfficial: true
+        });
+      } else if (type === constants.UNOFFICIAL_TOURIST_SITES_TYPE) {
+        query = TouristSite.find({
+          isOfficial: false
+        });
+      }
+
+
+      query = query.sort({
+        title: 1
+      })
         .skip(page * pageSize)
-        .limit(pageSize)
+        .limit(pageSize);
+
+      query.exec()
         .then(resolve, reject);
     });
 
@@ -33,7 +49,7 @@ class TouristSitesServices {
   }
 
   addTouristSite(touristSite) {
-    let promise = new Promise(function (resolve, reject) {
+    let promise = new Promise(function(resolve, reject) {
       touristSite.ratings = [];
       touristSite.comments = [];
       touristSite.status = constants.TOURIST_SITE_STATUS_WAITING_FOR_APPROVAL;
@@ -57,7 +73,7 @@ class TouristSitesServices {
     let maxLongitude = longitude + deltaInLongitudeDegrees;
 
     // Use lean() to be able to attach temporary property to mongoose object.
-    let promise = new Promise(function (resolve, reject) {
+    let promise = new Promise(function(resolve, reject) {
       TouristSite.find()
         .where('latitude')
         .lt(maxLatitude)
@@ -66,7 +82,7 @@ class TouristSitesServices {
         .lt(maxLongitude)
         .gt(minLongitude)
         .lean()
-        .exec(function (err, data) {
+        .exec(function(err, data) {
           if (err || !data) {
             reject(err);
             return;
@@ -79,7 +95,7 @@ class TouristSitesServices {
 
           let result = [];
 
-          data.forEach(function (item) {
+          data.forEach(function(item) {
             let distance = geopositionHelper.calculateDistanceInKilometers(myPosition, {
               latitude: item.latitude,
               longitude: item.longitude
@@ -91,7 +107,7 @@ class TouristSitesServices {
             }
           });
 
-          result.sort(function (first, second) {
+          result.sort(function(first, second) {
             return first.distanceFromMe - second.distanceFromMe;
           });
 

@@ -15,9 +15,10 @@ module.exports = {
       });
   },
   getForPage: function (req, res) {
-    let page = +req.query.page || 0;
-    page += 1;
-    touristSites.getForPage(page)
+    let page = +req.query.page || 1;
+    let type = +req.query.type || 0;
+    page -= 1;
+    touristSites.getForPage(page, type)
       .then(function (data) {
         res.json({
           result: data
