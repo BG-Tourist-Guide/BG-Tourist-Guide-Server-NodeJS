@@ -18,20 +18,6 @@ class TouristSitesServices {
 
   getForPage(page, type, pageSize) {
     pageSize = pageSize || DEFAULT_PAGE_SIZE;
-    
-    TouristSite.find()
-      .then(function (touristSites) {
-        touristSites.forEach(item => {
-          if (item.isOfficial) {
-            item.isApprovedForVisiting = true;
-          }
-          else {
-            item.isApprovedForVisiting = false;
-          }
-          
-          item.save();
-        });
-      });
 
     let promise = new Promise(function(resolve, reject) {
       let query;
@@ -40,14 +26,15 @@ class TouristSitesServices {
         query = TouristSite.find({});
       } else if (type === constants.OFFICIAL_TOURIST_SITES_TYPE) {
         query = TouristSite.find({
-          isOfficial: true
+          isOfficial: true,
+          isApprovedForVisiting: true
         });
       } else if (type === constants.UNOFFICIAL_TOURIST_SITES_TYPE) {
         query = TouristSite.find({
-          isOfficial: false
+          isOfficial: false,
+          isApprovedForVisiting: true
         });
       }
-
 
       query = query.sort({
         title: 1
@@ -133,22 +120,22 @@ class TouristSitesServices {
   }
 
   rateTouristSite(id, author, rateValue) {
-    let promise = new Promise(function (resolve, reject) {
-        let rating = {
-      value: rateValue,
-      author
-    };
-    
-    TouristSite.findById(id)
-      .then(function (touristSite) {
-        touristSite.ratings.push(rating);
-        return touristSite.save();
-      }, reject)
-      .then(function (touristSite) {
-        resolve(touristSite);
-      }, reject);
+    let promise = new Promise(function(resolve, reject) {
+      let rating = {
+        value: rateValue,
+        author
+      };
+
+      TouristSite.findById(id)
+        .then(function(touristSite) {
+          touristSite.ratings.push(rating);
+          return touristSite.save();
+        }, reject)
+        .then(function(touristSite) {
+          resolve(touristSite);
+        }, reject);
     });
-    
+
     return promise;
   }
 }
