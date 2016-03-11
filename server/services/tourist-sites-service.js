@@ -75,7 +75,9 @@ class TouristSitesServices {
 
     // Use lean() to be able to attach temporary property to mongoose object.
     let promise = new Promise(function(resolve, reject) {
-      TouristSite.find()
+      TouristSite.find({
+        isApprovedForVisiting: true
+      })
         .where('latitude')
         .lt(maxLatitude)
         .gt(minLatitude)
