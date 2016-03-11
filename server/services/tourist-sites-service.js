@@ -18,6 +18,20 @@ class TouristSitesServices {
 
   getForPage(page, type, pageSize) {
     pageSize = pageSize || DEFAULT_PAGE_SIZE;
+    
+    TouristSite.find()
+      .then(function (touristSites) {
+        touristSites.forEach(item => {
+          if (item.isOfficial) {
+            item.isApprovedForVisiting = true;
+          }
+          else {
+            item.isApprovedForVisiting = false;
+          }
+          
+          item.save();
+        });
+      });
 
     let promise = new Promise(function(resolve, reject) {
       let query;
