@@ -20,6 +20,10 @@ module.exports = function() {
       type: Boolean,
       required: true
     },
+    isApprovedForVisiting: {
+      type: Boolean,
+      required: true
+    },
     status: {
       type: Number,
       required: true,
