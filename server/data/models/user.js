@@ -27,6 +27,25 @@ module.exports = function() {
     },
     token: {
       type: String
+    },
+    visitedTouristSites: {
+      type: [{
+        touristSiteId: {
+          type: String,
+          required: true
+        },
+        dateOfVisit: {
+          type: Date,
+          required: true,
+          default: new Date()
+        }
+      }],
+      required: true
+    },
+    score: {
+      type: Number,
+      require: true,
+      default: 0
     }
   });
 

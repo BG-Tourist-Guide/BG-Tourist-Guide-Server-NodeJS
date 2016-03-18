@@ -94,5 +94,21 @@ module.exports = {
           result: touristSite
         });
       });
+  },
+  visitTouristSite(req, res) {
+    let user = req.user;
+    let touristSiteId = req.query.id;
+
+    touristSites.visitTouristSite(touristSiteId, user)
+      .then(function(visitedTouristSite) {
+        res.json({
+          result: visitedTouristSite
+        });
+      }, function(err) {
+        res.status(400)
+          .json({
+            message: err.message
+          });
+      });
   }
 };

@@ -69,7 +69,17 @@ module.exports = function() {
       default: []
     },
     visitors: {
-      type: [String],
+      type: [{
+        userName: {
+          type: String,
+          required: true
+        },
+        dateOfVisit: {
+          type: Date,
+          required: true,
+          default: new Date()
+        }
+      }],
       default: []
     }
   });

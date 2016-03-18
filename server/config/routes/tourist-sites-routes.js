@@ -11,7 +11,7 @@ module.exports = function (app) {
     .get('/all', touristSitesController.getAll)
     .get('/near-me', touristSitesController.nearMe)
     .post('/rate', identity.requiresAuthentication(), touristSitesController.rateTouristSite)
-    .post('/', identity.requiresAuthentication(), touristSitesController.addTouristSite);
+    .put('/visit', identity.requiresAuthentication(), touristSitesController.visitTouristSite);
 
   app.use('/api/tourist-sites', router);
 };
