@@ -48,5 +48,18 @@ module.exports = {
         res.status(400)
           .json(err);
       });
+  },
+  getProfileInformation(req, res) {
+    let user = req.user;
+
+    identity.getProfileInformation(user)
+      .then(function(dbUser) {
+        res.json({
+          result: dbUser
+        });
+      }, function(err) {
+        res.status(400)
+          .json(err);
+      });
   }
 };

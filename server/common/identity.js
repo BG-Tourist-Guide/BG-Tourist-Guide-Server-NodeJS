@@ -59,5 +59,15 @@ module.exports = {
   },
   isAuthorizedForRole: function(user, role) {
     return user.roles.indexOf(role) > -1;
+  },
+  getProfileInformation: function (user) {
+    let promise = new Promise(function (resolve, reject) {
+        User.findById(user._id)
+          .then(function(dbUser) {
+            resolve(dbUser);
+          }, reject);
+    });
+    
+    return promise;
   }
 };

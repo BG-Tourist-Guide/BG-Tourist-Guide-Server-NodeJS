@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   router
     .post('/', usersController.createUser)
+    .get('/profile', usersController.getProfileInformation)
     .put('/token', usersController.loginUser);
 
   app.use('/api/users', router);
