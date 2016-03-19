@@ -14,9 +14,11 @@ module.exports = {
           if (err) {
             return done(err);
           }
+
           if (!user) {
             return done(null, false);
           }
+
           return done(null, user, {
             scope: 'all'
           });

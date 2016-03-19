@@ -39,12 +39,10 @@ module.exports = function() {
           required: true,
           default: new Date()
         }
-      }],
-      required: true
+      }]
     },
     score: {
       type: Number,
-      require: true,
       default: 0
     }
   });

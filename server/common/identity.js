@@ -27,9 +27,14 @@ module.exports = {
         }
 
         user.token = user.token || tokenGenerator.generateToken();
-        user.save();
+        user.save(function(err, dbUser) {
+          if (err) {
+            reject(err);
+            return;
+          }
 
-        resolve(user);
+          resolve(dbUser);
+        });
       });
     });
 
@@ -38,6 +43,8 @@ module.exports = {
   createUser: function(user) {
     user.password = encryption.hashText(user.password);
     user.token = tokenGenerator.generateToken();
+    user.visitedTouristSites = [];
+    user.score = 0;
 
     let promise = new Promise(function(resolve, reject) {
       User.create(user, function(err, data) {
@@ -60,14 +67,14 @@ module.exports = {
   isAuthorizedForRole: function(user, role) {
     return user.roles.indexOf(role) > -1;
   },
-  getProfileInformation: function (user) {
-    let promise = new Promise(function (resolve, reject) {
-        User.findById(user._id)
-          .then(function(dbUser) {
-            resolve(dbUser);
-          }, reject);
+  getProfileInformation: function(user) {
+    let promise = new Promise(function(resolve, reject) {
+      User.findById(user._id)
+        .then(function(dbUser) {
+          resolve(dbUser);
+        }, reject);
     });
-    
+
     return promise;
   }
 };
