@@ -12,15 +12,29 @@ class UsersServices {
       User.findById(user._id)
         .then(function(dbUser) {
           if (!dbUser.visitedTouristSites) {
-            console.log('in');
             dbUser.visitedTouristSites = [];
           }
-                    
+
+          let hasVisitedTheTouristSite = user.visitedTouristSites.filter(t => {
+            return t.touristSiteId === touristSite._id.toString();
+          }).length > 0;
+
+          if (hasVisitedTheTouristSite) {
+            console.log('gere');
+            reject({
+              message: 'The user has already visited this tourist site.'
+            });
+            return;
+          }
+
+          // TODO: Add check for the distance from the last visited tourist site and the time.
+          // is it possible to visit?
+
           let visit = {
             touristSiteId: touristSite._id,
             dateOfVisit: Date.now()
           };
-          
+
           dbUser.visitedTouristSites.push(visit);
 
           if (!dbUser.score) {
@@ -33,13 +47,13 @@ class UsersServices {
           else {
             dbUser.score += constants.UNOFFICIAL_TOURIST_SITE_VISIT_POINTS;
           }
-          
+
           dbUser.save(function(err) {
             if (err) {
               reject(err);
               return;
             }
-            
+
             resolve(dbUser);
           });
         }, reject);

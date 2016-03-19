@@ -101,7 +101,6 @@ module.exports = {
 
     touristSites.visitTouristSite(touristSiteId, user)
       .then(function(visitedTouristSite) {
-        console.log(visitedTouristSite);
         res.json({
           result: visitedTouristSite
         });
