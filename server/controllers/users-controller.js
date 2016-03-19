@@ -54,6 +54,7 @@ module.exports = {
 
     identity.getProfileInformation(user)
       .then(function(dbUser) {
+        dbUser.password = undefined;
         res.json({
           result: dbUser
         });
