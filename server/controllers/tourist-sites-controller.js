@@ -97,10 +97,11 @@ module.exports = {
   },
   visitTouristSite(req, res) {
     let user = req.user;
-    let touristSiteId = req.query.id;
+    let touristSiteId = req.body.touristSiteId;
 
     touristSites.visitTouristSite(touristSiteId, user)
       .then(function(visitedTouristSite) {
+        console.log(visitedTouristSite);
         res.json({
           result: visitedTouristSite
         });

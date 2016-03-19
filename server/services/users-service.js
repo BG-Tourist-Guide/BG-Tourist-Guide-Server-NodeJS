@@ -12,14 +12,15 @@ class UsersServices {
       User.findById(user._id)
         .then(function(dbUser) {
           if (!dbUser.visitedTouristSites) {
+            console.log('in');
             dbUser.visitedTouristSites = [];
           }
-
+                    
           let visit = {
             touristSiteId: touristSite._id,
             dateOfVisit: Date.now()
           };
-
+          
           dbUser.visitedTouristSites.push(visit);
 
           if (!dbUser.score) {
@@ -32,13 +33,13 @@ class UsersServices {
           else {
             dbUser.score += constants.UNOFFICIAL_TOURIST_SITE_VISIT_POINTS;
           }
-
+          
           dbUser.save(function(err) {
             if (err) {
               reject(err);
               return;
             }
-
+            
             resolve(dbUser);
           });
         }, reject);
