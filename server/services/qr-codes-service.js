@@ -40,6 +40,7 @@ class QrCodesService {
           TouristSite.find({isApprovedForVisiting: true}, '_id')
             .then(function(allTouristSites) {
               let promises = [];
+              
               allTouristSites.forEach(function(touristSite) {
                 let touristSiteFileName = `${touristSite._id}.${DEFAULT_IMAGE_EXTENSION}`;
                 if (files.indexOf(touristSiteFileName) < 0) {
