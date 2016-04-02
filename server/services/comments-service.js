@@ -7,7 +7,7 @@ let TouristSite = mongoose.model('TouristSite');
 let usersService = require('./users-service').defaultInstance;
 let constants = require('./../common/constants');
 
-class TouristSitesServices {
+class TouristSitesService {
   getCommentsForTouristSite(touristSiteId, page, pageSize) {
     pageSize = pageSize || DEFAULT_PAGE_SIZE;
 
@@ -180,6 +180,6 @@ class TouristSitesServices {
 }
 
 module.exports = {
-  TouristSitesServices: TouristSitesServices,
-  defaultInstance: new TouristSitesServices()
+  TouristSitesService: TouristSitesService,
+  defaultInstance: new TouristSitesService()
 };

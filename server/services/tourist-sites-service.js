@@ -8,7 +8,7 @@ let usersService = require('./users-service').defaultInstance;
 let geopositionHelper = require('./../infrastructure/geoposition-helper.js').defaultInstance;
 let constants = require('./../common/constants');
 
-class TouristSitesServices {
+class TouristSitesService {
   getAll() {
     let promise = new Promise(function(resolve, reject) {
       TouristSite.find({})
@@ -189,6 +189,6 @@ class TouristSitesServices {
 }
 
 module.exports = {
-  TouristSitesServices: TouristSitesServices,
-  defaultInstance: new TouristSitesServices()
+  TouristSitesService: TouristSitesService,
+  defaultInstance: new TouristSitesService()
 };

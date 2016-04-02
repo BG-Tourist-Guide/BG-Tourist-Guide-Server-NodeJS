@@ -6,7 +6,7 @@ let mongoose = require('mongoose');
 let User = mongoose.model('User');
 let constants = require('./../common/constants');
 
-class UsersServices {
+class UsersService {
   visitTouristSite(touristSite, user) {
     let promise = new Promise(function(resolve, reject) {
       User.findById(user._id)
@@ -64,6 +64,6 @@ class UsersServices {
 }
 
 module.exports = {
-  UsersServices: UsersServices,
-  defaultInstance: new UsersServices()
+  UsersService: UsersService,
+  defaultInstance: new UsersService()
 };
