@@ -1,6 +1,7 @@
 'use strict';
 let modelValidator = require('./../common/model-validator');
 let touristSites = require('./../services/tourist-sites-service.js').defaultInstance;
+let qrCodes = require('./../services/qr-codes-service.js').defaultInstance;
 
 module.exports = {
   getAll: function(req, res) {
@@ -63,9 +64,17 @@ module.exports = {
 
     touristSites.addTouristSite(touristSite)
       .then(function(dbTouristSite) {
-        res.status(201)
-          .json({
-            result: dbTouristSite
+        qrCodes.createQrCode(dbTouristSite._id)
+          .then(function (qrCodePath) {
+            res.status(201)
+              .json({
+                result: dbTouristSite
+              });
+          }, function (err) {
+            res.status(500)
+              .json({
+                message: 'There was a problem while creating the qr code for this tourist site. Please report this error'
+              });
           });
       }, function(err) {
         console.log(err);

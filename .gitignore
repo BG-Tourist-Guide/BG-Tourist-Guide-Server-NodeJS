@@ -26,6 +26,9 @@ build/Release
 # Dependency directory
 node_modules
 
+# QR Codes directory
+public/qr-codes
+
 # Optional npm cache directory
 .npm
 
