@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   router
     .post('/generate-for-all', identity.requiresAuthentication(), qrCodesController.generateQrCodesForAllTouristSites)
+    .get('/get-generated-ids', identity.requiresAuthentication(), qrCodesController.getAllGeneratedQrCodesList)
     .get('/:id', qrCodesController.getQrCodeForTouristSite);
 
   app.use('/api/qr-codes', router);

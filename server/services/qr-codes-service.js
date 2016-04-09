@@ -60,6 +60,22 @@ class QrCodesService {
     return promise;
   }
   
+  getAllGeneratedQrCodesList() {
+    let that = this;
+    let promise = new Promise(function (resolve, reject) {
+        fs.readdir(QR_CODES_DIRECTORY, function(err, files) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          
+          resolve(files);
+        });
+    });
+    
+    return promise;
+  }
+  
   getQrCodeFilePath(name) {
     return `${QR_CODES_DIRECTORY}/${name}.${DEFAULT_IMAGE_EXTENSION}`;
   }

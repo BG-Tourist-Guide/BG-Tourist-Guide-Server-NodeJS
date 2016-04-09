@@ -37,5 +37,29 @@ module.exports = {
         res.status(500)
           .json(err);
       });
+  },
+  getAllGeneratedQrCodesList(req, res) {
+    let user = req.user;
+    let isUserAdmin = identity.isAuthorizedForRole(user, constants.ADMIN_ROLE);
+    
+    if (!isUserAdmin) {
+      res.status(401)
+        .json({
+          message: 'You are not authorized to do this!'
+        });
+        
+        return;
+    }
+    
+    qrCodes.getAllGeneratedQrCodesList()
+      .then(function(data) {
+        res.status(200)
+          .json({
+            result: data
+          });
+      }, function(err) {
+        res.status(500)
+          .json(err);
+      });
   }
 };
