@@ -13,10 +13,4 @@ mongooseConfig.configure();
 passportConfig.configure();
 expressConfig.configure(app);
 routeConfig.registerRoutes(app);
-qrCodes.createQrCodesForAllTouristSites()
-  .then(function (result) {
-    console.log(result);
-    app.listen(port, () => console.log(`Server running on port: ${port}`));
-  }, function(err) {
-    console.log(err);
-  });
+app.listen(port, () => console.log(`Server running on port: ${port}`));
