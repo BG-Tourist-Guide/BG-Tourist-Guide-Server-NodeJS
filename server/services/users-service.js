@@ -20,7 +20,6 @@ class UsersService {
           }).length > 0;
 
           if (hasVisitedTheTouristSite) {
-            console.log('gere');
             reject({
               message: 'The user has already visited this tourist site.'
             });

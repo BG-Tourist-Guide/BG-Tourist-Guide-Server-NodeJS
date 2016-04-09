@@ -6,6 +6,7 @@ let mongoose = require('mongoose');
 let TouristSite = mongoose.model('TouristSite');
 let usersService = require('./users-service').defaultInstance;
 let constants = require('./../common/constants');
+let logger = require('./../common/logger');
 
 class TouristSitesService {
   getCommentsForTouristSite(touristSiteId, page, pageSize) {
@@ -42,7 +43,7 @@ class TouristSitesService {
 
           dbTouristSite.save(function(err, savedTouristSite) {
             if (err) {
-              console.log(err);
+              logger.log(err);
               reject(err);
               return;
             }

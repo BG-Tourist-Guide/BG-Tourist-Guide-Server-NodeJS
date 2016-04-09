@@ -1,5 +1,6 @@
 'use strict';
 let usersImporter = require('./users-importer');
+let logger = require('./../../common/logger');
 
 module.exports = {
   seedInitialData: function(shouldSeedData) {
@@ -9,10 +10,10 @@ module.exports = {
 
     usersImporter.importUsers()
       .then(function() {
-        console.log('Data imported!');
+        logger.log('Data imported!');
       })
       .catch(function(err) {
-        console.log(err);
+        logger.err(err);
       });
   }
 };

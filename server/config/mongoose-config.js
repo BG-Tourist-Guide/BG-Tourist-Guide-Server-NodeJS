@@ -1,5 +1,6 @@
 'use strict';
 let mongoose = require('mongoose');
+let logger = require('./../common/logger');
 let modelsLoader = require('./../data/models');
 let dataImporter = require('./../data/data-importers/data-importer');
 let env = process.env.NODE_ENV || 'development';
@@ -22,7 +23,7 @@ module.exports = {
     let database = mongoose.connection;
 
     database.once('open', function() {
-      console.log('Database is running!');
+      logger.log('Database is running!');
       dataImporter.seedInitialData(shouldSeedData);
     });
   }

@@ -1,5 +1,6 @@
 'use strict';
 let modelValidator = require('./../common/model-validator');
+let logger = require('./../common/logger');
 let comments = require('./../services/comments-service.js').defaultInstance;
 
 module.exports = {
@@ -36,7 +37,7 @@ module.exports = {
             result: dbTouristSite
           });
       }, function(err) {
-        console.log(err);
+        logger.err(err);
         res.status(400)
           .json({
             message: 'The comment was not saved.'

@@ -3,6 +3,7 @@ let User = require('mongoose').model('User');
 let encryption = require('./../common/encryption');
 let identity = require('./../common/identity');
 let constants = require('./../common/constants');
+let logger = require('./../common/logger');
 
 module.exports = {
   createUser: function(req, res) {
@@ -44,7 +45,7 @@ module.exports = {
         });
       })
       .catch(function(err) {
-        console.log(err);
+        logger.err(err);
         res.status(400)
           .json(err);
       });

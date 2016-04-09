@@ -1,5 +1,6 @@
 'use strict';
 let modelValidator = require('./../common/model-validator');
+let logger = require('./../common/logger');
 let touristSites = require('./../services/tourist-sites-service.js').defaultInstance;
 let qrCodes = require('./../services/qr-codes-service.js').defaultInstance;
 
@@ -44,7 +45,6 @@ module.exports = {
 
     touristSites.getTouristSitesNearMe(latitude, longitude, radius)
       .then(function(touristSitesNearMe) {
-        console.log(touristSitesNearMe.length);
         res.json({
           result: touristSitesNearMe
         });
@@ -77,7 +77,7 @@ module.exports = {
               });
           });
       }, function(err) {
-        console.log(err);
+        logger.err(err);
         res.status(400)
           .json({
             message: 'The tourist site cannot be saved. The input data is not valid.'

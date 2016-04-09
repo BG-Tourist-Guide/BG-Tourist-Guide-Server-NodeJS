@@ -1,6 +1,7 @@
 'use strict';
-let encryption = require('./../../common/encryption'),
-  constants = require('./../../common/constants');
+let encryption = require('./../../common/encryption');
+let constants = require('./../../common/constants');
+let logger = require('./../../common/logger');
 
 module.exports = {
   importUsers: function() {
@@ -10,7 +11,7 @@ module.exports = {
       User.find()
         .then(function(data) {
           if (data.length <= 0) {
-            console.log('Adding Users to database.');
+            logger.log('Adding Users to database.');
             let adminUser = {};
 
             adminUser.userName = 'admin';
@@ -37,12 +38,12 @@ module.exports = {
 
             User.create(usersToCreate, function(err, data) {
               if (err) {
-                console.log(err);
+                logger.err(err);
                 reject(err);
                 return;
               }
 
-              console.log('Users added to database!');
+              logger.log('Users added to database!');
               resolve(data);
             });
           } else {
@@ -50,7 +51,7 @@ module.exports = {
           }
         })
         .catch(function(err) {
-          console.log(err);
+          logger.err(err);
         });
     });
 

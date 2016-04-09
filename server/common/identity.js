@@ -1,6 +1,7 @@
 'use strict';
 let passport = require('passport');
 let tokenGenerator = require('./../common/token-generator');
+let logger = require('./../common/logger');
 let User = require('mongoose').model('User');
 let constants = require('./constants');
 let encryption = require('./encryption');
@@ -53,7 +54,7 @@ module.exports = {
             message: 'Cannot create user.'
           };
 
-          console.log(err);
+          logger.err(err);
           reject(err);
           return;
         }
