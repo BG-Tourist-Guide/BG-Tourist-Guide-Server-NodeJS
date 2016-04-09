@@ -3,6 +3,7 @@
 let qrCode = require('node-qrcode');
 let fs = require('fs');
 let path = require('path');
+let logger = require('./../common/logger');
 const QR_CODES_DIRECTORY = path.join('./', 'public', 'qr-codes');
 const DEFAULT_IMAGE_EXTENSION = 'png';
 
@@ -12,6 +13,7 @@ class QrCodesService {
     let promise = new Promise(function (resolve, reject) {
         fs.readFile(that.getQrCodeFilePath(touristSiteId), function (err, file) {
           if (err) {
+            logger.err(err);
             reject(err);
             return;
           }
@@ -51,9 +53,15 @@ class QrCodesService {
               Promise.all(promises)
                 .then(function (result) {
                   resolve('All QR Codes are created.');
-                }, reject);
+                }, function (err) {
+                  logger.err(err);
+                  reject(err);
+                });
               
-            }, reject);
+            }, function (err) {
+                logger.err(err);
+                reject(err);
+            });
         });
     });
     
