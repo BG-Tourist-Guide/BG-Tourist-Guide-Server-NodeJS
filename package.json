@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "sudo mount -o remount,rw / && apt-get install libpixman-1-dev libcairo2-dev libpangocairo-1.0-0 libpango1.0-dev libgif-dev",
     "start": "node app.js"
   },
   "engines": {
@@ -26,9 +27,9 @@
     "express": "^4.13.4",
     "hat": "0.0.3",
     "mongoose": "^4.4.5",
-    "node-qrcode": "0.0.4",
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
+    "qrcode": "^0.4.2",
     "sha1": "^1.1.1"
   }
 }

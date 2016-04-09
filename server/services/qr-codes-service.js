@@ -1,6 +1,6 @@
 'use strict';
 
-let qrCode = require('node-qrcode');
+let qrCode = require('qrcode');
 let fs = require('fs');
 let path = require('path');
 const QR_CODES_DIRECTORY = path.join('./', 'public', 'qr-codes');
@@ -25,11 +25,19 @@ class QrCodesService {
   
   createQrCode(touristSiteId) {
     let qrCodePath = this.getQrCodeFilePath(touristSiteId);
-      return qrCode({
-            text: touristSiteId,
-            size: 5,
-            qrcodePath: qrCodePath
-      });
+    let promise = new Promise(function (resolve, reject) {
+        qrCode.save(qrCodePath, touristSiteId.toString(), {}, function(err, bytesWritten) {
+          if (err) {
+            console.log(err);
+            reject(err);
+            return;
+          }
+          
+          resolve(true);
+        });
+    });
+    
+    return promise;
   }
   
   createQrCodesForAllTouristSites() {
@@ -51,9 +59,28 @@ class QrCodesService {
               Promise.all(promises)
                 .then(function (result) {
                   resolve('All QR Codes are created.');
-                }, reject);
+                }, function(err) {
+                  console.log(err);
+                  reject(err);
+                });
               
             }, reject);
+        });
+    });
+    
+    return promise;
+  }
+  
+  getAllGeneratedQrCodesList() {
+    let that = this;
+    let promise = new Promise(function (resolve, reject) {
+        fs.readdir(QR_CODES_DIRECTORY, function(err, files) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          
+          resolve(files);
         });
     });
     
