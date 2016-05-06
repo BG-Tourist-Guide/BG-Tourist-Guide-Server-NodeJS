@@ -29,7 +29,7 @@ class QrCodesService {
     let qrCodePath = this.getQrCodeFilePath(touristSiteId);
       return qrCode({
             text: touristSiteId,
-            size: 5,
+            size: 150,
             qrcodePath: qrCodePath
       });
   }
