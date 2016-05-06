@@ -25,7 +25,7 @@ class TouristSitesService {
       let query;
 
       if (type === constants.ALL_TOURIST_SITES_TYPE) {
-        query = TouristSite.find({});
+        query = TouristSite.find({ isApprovedForVisiting: true });
       } else if (type === constants.OFFICIAL_TOURIST_SITES_TYPE) {
         query = TouristSite.find({
           isOfficial: true,
@@ -36,6 +36,11 @@ class TouristSitesService {
           isOfficial: false,
           isApprovedForVisiting: true
         });
+      } else {
+        reject({
+          message: 'Invalid tourist site type.'
+        });
+        return;
       }
 
       query = query.sort({
