@@ -1,0 +1,3 @@
+[submodule "public/web"]
+	path = public/web
+	url = git@github.com:BG-Tourist-Guide/BG-Tourist-Guide-Web-Client.git
