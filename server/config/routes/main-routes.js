@@ -7,6 +7,9 @@ module.exports = function(app) {
   router
     .get('/', function(req, res) {
       res.render('index.html');
+    })
+    .get('/index.html', function(req, res) {
+      res.render('index.html');
     });
 
   app.use('/', router);
