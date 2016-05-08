@@ -8,7 +8,6 @@ let logger = require('./server/common/logger');
 
 let app = express();
 let port = process.env.PORT || 4000;
-process.env.PWD = process.cwd();
 
 mongooseConfig.configure();
 passportConfig.configure();
